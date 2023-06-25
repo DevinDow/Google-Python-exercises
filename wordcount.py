@@ -44,21 +44,24 @@ import sys
 # and builds and returns a word/count dict for it.
 # Then print_words() and print_top() can just call the utility function.
 
+
+'''prints words & count sorted alphabetically'''
 def print_words(filename):
   wordCount = read_words(filename)
+
   # sort by word
   for word in sorted(wordCount.keys()): 
     print(word, '->', wordCount[word])
-  return
 
 
+'''prints top 20 words & count sorted by count'''
 def print_top(filename):
   wordCount = read_words(filename)
+
   # sort by count (top 20)
   sortedWords = sorted(wordCount.items(), key=getCount, reverse=True)
   for item in sortedWords[:20]:
     print(item[0], '->', item[1])
-  return
 
 def getCount(item):
   return item[1]
@@ -68,13 +71,16 @@ def getCount(item):
 def read_words(filename):
   wordCount = {}
   f = open(filename, 'r')
-  for line in f:
-    words = line.split()
-    for word in words:
-      if word.lower() not in wordCount:
-        wordCount[word.lower()] = 1
-      else:
-        wordCount[word.lower()] += 1
+  #for line in f:
+  #f.readlines()
+  words = f.read().split()
+  #TODO: trim punctuation
+  for word in words:
+    if word.lower() not in wordCount:
+      wordCount[word.lower()] = 1
+    else:
+      wordCount[word.lower()] += 1
+  f.close()
   return wordCount
 
 

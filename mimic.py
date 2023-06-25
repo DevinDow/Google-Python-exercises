@@ -16,7 +16,7 @@ it into one giant string and split it once.
 
 Build a "mimic" dict that maps each word that appears in the file
 to a list of all the words that immediately follow that word in the file.
-The list of words can be be in any order and should include
+The list of words can be in any order and should include
 duplicates. So for example the key "and" might have the list
 ["then", "best", "then", "after", ...] listing
 all the words which came after "and" in the text.
