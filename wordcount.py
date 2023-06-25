@@ -45,16 +45,37 @@ import sys
 # Then print_words() and print_top() can just call the utility function.
 
 def print_words(filename):
+  wordCount = read_words(filename)
+  # sort by word
+  for word in sorted(wordCount.keys()): 
+    print(word, '->', wordCount[word])
   return
 
 
 def print_top(filename):
+  wordCount = read_words(filename)
+  # sort by count (top 20)
+  sortedWords = sorted(wordCount.items(), key=getCount, reverse=True)
+  for item in sortedWords[:20]:
+    print(item[0], '->', item[1])
   return
 
+def getCount(item):
+  return item[1]
 
+
+# read all words in lowercase into a dictionary with a count
 def read_words(filename):
-
-  return
+  wordCount = {}
+  f = open(filename, 'r')
+  for line in f:
+    words = line.split()
+    for word in words:
+      if word.lower() not in wordCount:
+        wordCount[word.lower()] = 1
+      else:
+        wordCount[word.lower()] += 1
+  return wordCount
 
 
 # This basic command line argument parsing code is provided and
