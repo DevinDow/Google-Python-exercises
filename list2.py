@@ -13,8 +13,11 @@
 # so [1, 2, 2, 3] returns [1, 2, 3]. You may create a new list or
 # modify the passed in list.
 def remove_adjacent(nums):
-  # +++your code here+++
-  return
+  print(nums)
+  newNums = []
+  for num in nums:
+    if len(newNums)==0 or newNums[-1] != num: newNums.append(num)
+  return newNums
 
 
 # E. Given two lists sorted in increasing order, create and return a merged
