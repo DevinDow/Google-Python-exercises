@@ -35,8 +35,13 @@ def match_ends(words):
 # Hint: this can be done by making 2 lists and sorting each of them
 # before combining them.
 def front_x(words):
-  # +++your code here+++
-  return
+  x = []
+  notX = []
+  for word in words:
+    if word[0] == 'x': x.append(word)
+    else: notX.append(word)
+  return sorted(x) + sorted(notX)
+
 
 
 
