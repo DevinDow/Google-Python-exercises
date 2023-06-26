@@ -43,11 +43,24 @@ def extract_names(filename):
   names = []
   f = open(filename)
   html = f.read()
+
+  # find year
   match = re.search(r'Popularity\sin\s(\d\d\d\d)', html)
   if not match:
     print('YEAR not found')
     sys.exit(1)
   names.append(match.group(1))
+
+  # find rank & names (rank, boy name, girl name)
+  tuples = re.findall(r'<td>(\d+)</td><td>(\w+)</td><td>(\w+)</td>', html)
+  if not match:
+    print('NAME not found')
+    sys.exit(1)
+  
+  for rank, boyname, girlname in tuples:
+    names.append(boyname + ' ' + rank)
+    names.append(girlname + ' ' + rank)
+
   f.close()
   return names
 
@@ -72,7 +85,14 @@ def main():
   # or write it to a summary file
   for filename in args:
     names = extract_names(filename)
-    print(names)
+    text = '\n'.join(names)
+
+    if summary:
+      outFilename = filename + '.summary'
+      out = open(outFilename, 'w')
+      out.write(text)
+    else:
+      print(text)
   
 if __name__ == '__main__':
   main()
