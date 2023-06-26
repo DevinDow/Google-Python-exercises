@@ -40,8 +40,16 @@ def extract_names(filename):
   followed by the name-rank strings in alphabetical order.
   ['2006', 'Aaliyah 91', Aaron 57', 'Abagail 895', ' ...]
   """
-  # +++your code here+++
-  return
+  names = []
+  f = open(filename)
+  html = f.read()
+  match = re.search(r'Popularity\sin\s(\d\d\d\d)', html)
+  if not match:
+    print('YEAR not found')
+    sys.exit(1)
+  names.append(match.group(1))
+  f.close()
+  return names
 
 
 def main():
@@ -51,7 +59,7 @@ def main():
   args = sys.argv[1:]
 
   if not args:
-    print 'usage: [--summaryfile] file [file ...]'
+    print('usage: [--summaryfile] file [file ...]')
     sys.exit(1)
 
   # Notice the summary flag and remove it from args if it is present.
@@ -60,9 +68,11 @@ def main():
     summary = True
     del args[0]
 
-  # +++your code here+++
   # For each filename, get the names, then either print the text output
   # or write it to a summary file
+  for filename in args:
+    names = extract_names(filename)
+    print(names)
   
 if __name__ == '__main__':
   main()
