@@ -58,8 +58,8 @@ def extract_names(filename):
     sys.exit(1)
   
   for rank, boyname, girlname in tuples:
-    names.append(boyname + ' ' + rank)
-    names.append(girlname + ' ' + rank)
+    names.append(boyname + ' ' + rank + ' BOY')
+    names.append(girlname + ' ' + rank + ' GIRL')
 
   f.close()
   return names
